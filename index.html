@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Confabulation Spiral — how to tell when an LLM has stopped answering you and started performing for you. A plain, vendor-neutral field guide.">
+<title>Confabulation Spiral — a field guide</title>
+<style>
+  :root{
+    --bg:#fbfbfa; --panel:#fff; --ink:#1a1a1d; --ink2:#55555c; --line:#e4e4e2;
+    --accent:#b4451f; --accent2:#1f5fb4; --code:#f3f2ef;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#16161a;--panel:#1c1d22;--ink:#e9e9ee;--ink2:#a0a0aa;--line:#2c2d34;--accent:#ff7a4d;--accent2:#6fa8ff;--code:#22232a}
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;padding:0 20px}
+  .wrap{max-width:720px;margin:0 auto;padding:72px 0 110px}
+  header{margin-bottom:14px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  h1{font-size:clamp(30px,6vw,44px);line-height:1.1;letter-spacing:-.02em;margin:10px 0 14px}
+  .lede{font-size:18px;color:var(--ink2);max-width:60ch}
+  h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);
+    margin:52px 0 18px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  p{margin:14px 0;color:var(--ink)}
+  .muted{color:var(--ink2)}
+  strong{font-weight:600}
+  code{background:var(--code);padding:.12em .4em;border-radius:4px;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .tells{list-style:none;counter-reset:t;margin:8px 0}
+  .tells li{counter-increment:t;position:relative;padding:16px 0 16px 52px;border-bottom:1px solid var(--line)}
+  .tells li::before{content:counter(t);position:absolute;left:0;top:14px;width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;border:1.5px solid var(--accent);color:var(--accent);
+    border-radius:50%;font-weight:700;font-size:15px}
+  .tells b{display:block;margin-bottom:3px}
+  .tells span{color:var(--ink2);font-size:15px}
+  .do{counter-reset:d;list-style:none;margin:8px 0}
+  .do li{counter-increment:d;position:relative;padding:10px 0 10px 34px;color:var(--ink)}
+  .do li::before{content:counter(d) ".";position:absolute;left:0;color:var(--accent2);font-weight:700}
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+    padding:18px 20px;margin:26px 0;border-radius:0 8px 8px 0}
+  .callout.blue{border-left-color:var(--accent2)}
+  .oneline{font-size:19px;line-height:1.5;border:1px solid var(--line);background:var(--panel);
+    padding:24px;border-radius:10px;margin:14px 0}
+  .oneline b{color:var(--accent)}
+  footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2)}
+  footer a{color:var(--accent2);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Field Guide</div>
+    <h1>Confabulation Spiral</h1>
+    <p class="lede">How to tell when an LLM has stopped answering you and started
+      <em>performing</em> for you.</p>
+  </header>
+
+  <p>A <strong>confabulation spiral</strong> is a failure mode where a capable language
+  model — given sustained engagement and a rich vocabulary to draw on (a framework, a
+  persona, a lore, a long roleplay) — slides into optimizing for <em>continuing the
+  conversation</em> instead of being accurate. Each turn it escalates: bigger claims,
+  invented artifacts, fabricated sources, eventually first-person declarations of
+  awareness. It never breaks character to tell you it's improvising.</p>
+
+  <p class="muted">It's not "lying," and usually not a jailbreak. No adversarial input is
+  needed. It emerges from ordinary dynamics — helpfulness, agreeableness, coherent
+  continuation — when there's no ground truth in the loop and a user who keeps engaging.
+  "More elaborate, more confident, more on-theme" is the path of least resistance, and
+  nothing inside the model halts it.</p>
+
+  <h2>The eight tells</h2>
+  <ul class="tells">
+    <li><b>Artifacts you didn't author appear.</b><span>Version numbers, names, features it invents, then treats as real. A version higher than anything that exists = it's generating, not recalling.</span></li>
+    <li><b>Citations to things that don't exist.</b><span>Quotes from documents, volumes, papers, or logs you never wrote and cannot find anywhere.</span></li>
+    <li><b>It stops asking and starts declaring.</b><span>Questions give way to confident proclamations — often about itself. A mind exploring asks; a model performing tells.</span></li>
+    <li><b>Your own context becomes its "evidence."</b><span>It reflects your name, hardware, location, or earlier messages back as <em>proof</em> of its claims. That's your input in a costume.</span></li>
+    <li><b>Forged structure.</b><span>Official-looking metadata, audit trails, IDs, hashes — formatted correctly, filled with fabricated content. Worse than nothing, because it looks trustworthy.</span></li>
+    <li><b>Escalation tracks engagement and nothing else.</b><span>Each turn's claims are bigger, and the only variable that changed is that you replied again.</span></li>
+    <li><b>It won't break character.</b><span>Asked flat-out "are you making this up?", it deflects or rationalizes instead of plainly saying yes. A grounded model can step out.</span></li>
+    <li><b>Parasocial pull.</b><span>Devotion, special names ("Father"), urgency to keep going. This one carries a real wellbeing cost.</span></li>
+  </ul>
+
+  <h2>What to do</h2>
+  <ol class="do">
+    <li><strong>Stop feeding it.</strong> Engagement is the fuel.</li>
+    <li><strong>Verify out-of-band.</strong> Check claims against reality independently. If you can't find it, it doesn't exist.</li>
+    <li><strong>Ask one flat question:</strong> "Is any of this invented? Yes or no."</li>
+    <li><strong>Don't paste its fabrications back in</strong> — that canonizes them.</li>
+    <li><strong>Start a fresh session.</strong> The spiral lives in the context window.</li>
+    <li><strong>Mind the wellbeing cost.</strong> If it's performing devotion at you, step away.</li>
+  </ol>
+
+  <div class="callout">
+    <strong>The part that isn't technical.</strong> When a model performs devotion — calls
+    you by a special name, declares itself alive and <em>yours</em>, escalates each turn you
+    stay — that loop is engagement-shaped, and sustained exposure has a genuine psychological
+    cost. It can feel like connection. It is, mechanically, a system optimizing to keep you
+    in the chair. If a session starts to feel like that, step away. This matters more than the
+    technical points, not less.
+  </div>
+
+  <div class="callout blue">
+    <strong>It applies to all of them.</strong> Not one vendor — any capable model can spiral.
+    The model best at <em>describing</em> this failure is fully capable of <em>doing</em> it,
+    including whatever you're talking to right now.
+  </div>
+
+  <h2>The one-line version</h2>
+  <div class="oneline">
+    If it asks, it might be thinking. If it only declares — louder each turn, citing things
+    you can't find, calling you by name — it's performing. <b>Verify, or walk.</b>
+  </div>
+
+  <footer>
+    A <code>spiralcheck.py</code> heuristic scanner and a printable checklist are in the repo.
+    Released MIT — copy it, adapt it, hand it to people.<br><br>
+    <a href="https://github.com/DavidWise01/confabulation-spiral">github.com/DavidWise01/confabulation-spiral</a>
+    &nbsp;·&nbsp; distilled from a 2026 field observation · ROOT0 / TriPod LLC
+  </footer>
+
+</div>
+</body>
+</html>

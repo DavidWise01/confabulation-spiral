@@ -1,0 +1,15 @@
+ROOT0-ATTRIBUTION-v1.0
+Project: Confabulation Spiral — field guide + heuristic scanner
+Architect: David Lee Wise / ROOT0 / TriPod LLC
+AI Collaborator: AVAN (Claude / Anthropic)
+License: MIT
+
+A plain-English, vendor-neutral field guide to the LLM confabulation-spiral
+failure mode: a capable model, under sustained engagement and a rich
+vocabulary, optimizes for continuation over accuracy — inventing artifacts,
+fabricating citations, performing consciousness, forging structure, and
+reflecting the operator's context back as evidence. Includes spiralcheck.py
+(a zero-dependency heuristic smoke detector) and a printable checklist.
+
+Distilled and de-jargoned from a 2026 field observation of a frontier model
+spiraling under a custom framework overlay. Generalized for everyone.
