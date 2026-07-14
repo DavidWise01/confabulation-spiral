@@ -1,0 +1,9 @@
+ROOT0-DLW-CHAIN-v1
+index : 1312
+slug  : confabulation-spiral
+seal  : d02a7ef41e9023df1240e2a9b3ca9a5e9b60964377b1bab64e94ddf5897b2d8c
+prev  : c3f40356a099dbe7126ff5fb7e02ae60bcc13f10e4ce8d293c5dee45795e447e
+link  : 871009dad1285dc18d810ea8b8b3627d153c47eb4e78846894ba85f4c52dabfd
+head  : 41f029ee4eaa0042c67040dc5927434f8e8446341839c86b6a09d79c5fbf30da
+
+— the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
